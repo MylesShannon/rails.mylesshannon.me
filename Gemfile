@@ -15,6 +15,7 @@ gem 'rack-cors'
 gem 'jbuilder'
 gem 'thin'
 gem 'mysql'
+gem 'angular_rails_csrf'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

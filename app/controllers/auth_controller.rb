@@ -16,6 +16,10 @@ class AuthController < ApplicationController
     end
   end
 
+  def index
+    render text: 'API is available', status: 200
+  end
+
   def authenticate
     @oauth = "Oauth::#{params['provider'].titleize}".constantize.new(params)     
     if @oauth.authorized?
@@ -35,7 +39,7 @@ class AuthController < ApplicationController
 
     if User.exists?(provider: params[:provider], uid: params[:uid])
       user = User.where(provider: params[:provider], uid: params[:uid]).first
-      puts "USER EXISTS - #{user.id}"
+      # puts "USER EXISTS - #{user.id}"
     else
       user = User.new
       user.uid = params[:uid]
@@ -50,7 +54,7 @@ class AuthController < ApplicationController
       user.image = params[:image_url]
       user.display_name = user.first_name
       user.save
-      puts "NEW USER - #{user.id}"
+      # puts "NEW USER - #{user.id}"
     end
 
     return user

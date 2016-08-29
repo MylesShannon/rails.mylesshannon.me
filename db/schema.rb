@@ -24,10 +24,8 @@ ActiveRecord::Schema.define(version: 20160828032534) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "notes", ["user_id"], name: "index_notes_on_user_id"
-
   create_table "users", force: :cascade do |t|
-    t.string   "email",        default: "", null: false
+    t.string   "email",        null: false
     t.string   "display_name"
     t.string   "first_name"
     t.string   "last_name"
@@ -35,8 +33,8 @@ ActiveRecord::Schema.define(version: 20160828032534) do
     t.string   "provider"
     t.string   "uid"
     t.string   "token"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

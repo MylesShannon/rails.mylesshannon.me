@@ -1,7 +1,7 @@
 class CreateNotes < ActiveRecord::Migration
   def change
     create_table :notes do |t|
-      t.references :user, index: true
+      t.references :user, foreign_key: true
       t.string :title
       t.string :subtitle
       t.text :body
@@ -10,6 +10,5 @@ class CreateNotes < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :notes, :users
   end
 end

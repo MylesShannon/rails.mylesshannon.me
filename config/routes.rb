@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => 'auth#index'
   post '/auth/:provider' => 'auth#authenticate'
 
   scope '/' do
