@@ -1,9 +1,30 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :null_session
+
+  before_filter :csrf_check
 
   private
+
+  def csrf_check
+    if request.headers['X-XSRF-TOKEN'] != session['XSRF-TOKEN'] && request.post?
+      puts "unauthorized"
+      head :unauthorized
+    end
+    token = SecureRandom.base64(100)
+    if Rails.env.production?
+      cookies['XSRF-TOKEN'] = {
+        value: token,
+        expires_after: 'Session',
+        domain: '.mylesshannon.me'
+      }
+    else
+      cookies['XSRF-TOKEN'] = {
+        value: token,
+        expires_after: 'Session',
+        domain: 'localhost'
+      }
+    end
+    session['XSRF-TOKEN'] = token
+  end
 
   def authenticate_user!
     unauthorized! unless current_user
