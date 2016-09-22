@@ -13,6 +13,12 @@ class NoteController < ApplicationController
 
   def new
     Note.create_new_note(params, current_user.id)
+    @note = Note.last
+    render 'note/new', status: 200
+  end
+
+  def delete
+    Note.find(params[:noteId]).destroy
     render status: 200
   end
 end

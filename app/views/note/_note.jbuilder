@@ -1,3 +1,4 @@
+json.id  note.id
 json.title note.title
 json.subtitle note.subtitle
 json.body note.body

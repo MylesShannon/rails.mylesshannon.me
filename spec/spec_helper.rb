@@ -16,8 +16,13 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'factory_girl_rails'
+require 'support/factory_girl'
+require 'support/json_helper'
 
 RSpec.configure do |config|
+  config.include JsonHelper, type: :request
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
